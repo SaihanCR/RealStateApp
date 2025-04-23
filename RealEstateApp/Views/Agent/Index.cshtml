@@ -1,7 +1,13 @@
-﻿@model ICollection<RealEstateApp.Core.Application.ViewModels.Agent.AgentViewModel>
+﻿@using RealEstateApp.Core.Application.ViewModels.Property
+@using RealEstateApp.Core.Application.Helpers
+@using RealEstateApp.Core.Application.Dtos.Account
+@model List<PropertyVm>
 
+@inject IHttpContextAccessor httpContextAccesor
 @{
-    ViewData["Title"] = "Listado de agentes";
+    ViewData["Title"] = "Home";
+    var user =  httpContextAccesor.HttpContext.Session.Get<AuthenticationResponse>("user");
+   
 }
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -131,9 +137,11 @@
         </div>
     </div>
 
-    <!-- Listado de agentes -->
-    <div class="row justify-content-center">
-        @if (Model.Any())
+    <div class="row">
+
+        
+
+        @if(Model==null || Model.Count==0)
         {
             @foreach (var agent in Model)
             {
@@ -154,7 +162,8 @@
                 <div class="alert alert-warning text-center">
                     No se encontraron agentes que coincidan con los filtros aplicados.
                 </div>
-            </div>
+            
+            }
         }
     </div> <!-- Cierre del row -->
 </div> <!-- Cierre del container -->
