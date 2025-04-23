@@ -36,6 +36,8 @@ namespace RealEstateApp.Core.Application
 
 
 
+            service.AddTransient<IChatService, ChatService>();
+            service.AddTransient<IMessageService, MessageService>();
 
 
         }
